@@ -1,0 +1,5 @@
+django
+Pillow
+django-filter
+rest_framework
+flake8
