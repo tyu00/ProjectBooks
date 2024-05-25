@@ -3,6 +3,7 @@ from rest_framework import status
 from django.urls import reverse
 from .models import Book
 
+
 class BookTests(APITestCase):
     def test_create_book(self):
         url = reverse('book-list')
@@ -19,14 +20,16 @@ class BookTests(APITestCase):
             self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         def test_get_single_book(self):
-            book = Book.objects.create(title='Test Book', author='Test Author', publication_date='2024-05-25', genre='Test Genre')
+            book = Book.objects.create(title='Test Book', author='Test Author', publication_date='2024-05-25',
+                                       genre='Test Genre')
             url = reverse('book-detail', kwargs={'pk': book.pk})
             response = self.client.get(url)
             self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     class BookTests(APITestCase):
         def test_update_book(self):
-            book = Book.objects.create(title='Test Book', author='Test Author', publication_date='2024-05-25', genre='Test Genre')
+            book = Book.objects.create(title='Test Book', author='Test Author', publication_date='2024-05-25',
+                                       genre='Test Genre')
             url = reverse('book-detail', kwargs={'pk': book.pk})
             data = {'title': 'Updated Title'}
             response = self.client.put(url, data, format='json')
@@ -35,7 +38,8 @@ class BookTests(APITestCase):
             self.assertEqual(book.title, 'Updated Title')
 
         def test_partial_update_book(self):
-            book = Book.objects.create(title='Test Book', author='Test Author', publication_date='2024-05-25', genre='Test Genre')
+            book = Book.objects.create(title='Test Book', author='Test Author', publication_date='2024-05-25',
+                                       genre='Test Genre')
             url = reverse('book-detail', kwargs={'pk': book.pk})
             data = {'title': 'Partial Update'}
             response = self.client.patch(url, data, format='json')
@@ -45,7 +49,8 @@ class BookTests(APITestCase):
 
     class BookTests(APITestCase):
         def test_delete_book(self):
-            book = Book.objects.create(title='Test Book', author='Test Author', publication_date='2024-05-25', genre='Test Genre')
+            book = Book.objects.create(title='Test Book', author='Test Author', publication_date='2024-05-25',
+                                       genre='Test Genre')
             url = reverse('book-detail', kwargs={'pk': book.pk})
             response = self.client.delete(url)
             self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
