@@ -3,8 +3,8 @@ from .models import Book
 
 
 class BookFilter(FilterSet):
-    title = filters.CharFilter(label='название', lookup_expr='icontains')
     author = filters.CharFilter(label='Автор', lookup_expr='icontains')
+    title = filters.CharFilter(label='название', lookup_expr='icontains')
     public_date = filters.DateFilter(field_name='publication_date', lookup_expr='lte', label='Дата публикации')
 
     class Meta:
